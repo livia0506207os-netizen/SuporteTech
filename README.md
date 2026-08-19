@@ -7,7 +7,7 @@ O sistema reúne documentação técnica, simulação de chamados, laboratório 
 
 ## Sobre o Projeto
 
-O **Portfólio de Suporte Técnico** é uma aplicação web desenvolvida com Python e Flask, estruturada em módulos independentes. A proposta é transformar conhecimentos de suporte técnico em exemplos práticos que possam ser consultados, executados e demonstrados em um ambiente de portfólio.
+O **SuporteTech** é uma aplicação web desenvolvida com Python e Flask, estruturada em módulos independentes. A proposta é transformar conhecimentos de suporte técnico em exemplos práticos que possam ser consultados, executados e demonstrados em um ambiente de portfólio.
 
 A aplicação possui uma página inicial com informações sobre os chamados registrados e integra diferentes módulos por meio de Blueprints do Flask. O projeto utiliza banco de dados SQLite para armazenar os chamados e organiza seus recursos em pastas específicas para documentação, laboratório, automação, segurança, templates e arquivos estáticos.
 
