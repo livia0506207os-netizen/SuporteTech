@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ nome_arquivo }}{% endblock %}
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('scripts.index') }}">Scripts de Automação</a></li>
+    <li class="breadcrumb-item active">{{ nome_arquivo }}</li>
+  </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4><i class="fa-solid fa-file-code"></i> {{ nome_arquivo }}</h4>
+  <a href="{{ url_for('scripts.baixar', pasta=pasta, nome_arquivo=nome_arquivo) }}" class="btn btn-primary">
+    <i class="fa-solid fa-download"></i> Baixar arquivo
+  </a>
+</div>
+
+<pre class="code-block"><code>{{ conteudo }}</code></pre>
+
+<a href="{{ url_for('scripts.index') }}" class="btn btn-outline-secondary mt-3">
+  <i class="fa-solid fa-arrow-left"></i> Voltar para Scripts
+</a>
+
+{% endblock %}

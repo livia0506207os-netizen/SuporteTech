@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ guia.titulo }}{% endblock %}
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('docs.index') }}">Documentação</a></li>
+    <li class="breadcrumb-item active">{{ categoria }}</li>
+    <li class="breadcrumb-item active">{{ guia.titulo }}</li>
+  </ol>
+</nav>
+
+<div class="card p-4">
+  <h2>{{ guia.icone }} {{ guia.titulo }}</h2>
+  <hr>
+  <div class="markdown-body">
+    {{ conteudo_html | safe }}
+  </div>
+</div>
+
+<a href="{{ url_for('docs.index') }}" class="btn btn-outline-secondary mt-4">
+  <i class="fa-solid fa-arrow-left"></i> Voltar para Documentação
+</a>
+
+{% endblock %}

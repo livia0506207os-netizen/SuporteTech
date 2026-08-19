@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Chamados{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2><i class="fa-solid fa-ticket text-danger"></i> Chamados de Suporte</h2>
+  <a href="{{ url_for('tickets.novo') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Abrir chamado</a>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <a href="{{ url_for('tickets.listar') }}" class="text-decoration-none">
+      <div class="card p-3 text-center {% if not status_filtro %}border-primary{% endif %}">
+        <h4>{{ total }}</h4>
+        <small class="text-muted">Todos</small>
+      </div>
+    </a>
+  </div>
+  {% for status in status_choices %}
+  <div class="col-md-3">
+    <a href="{{ url_for('tickets.listar', status=status) }}" class="text-decoration-none">
+      <div class="card p-3 text-center {% if status_filtro == status %}border-primary{% endif %}">
+        <h4>{{ resumo[status] }}</h4>
+        <small class="text-muted">{{ status }}</small>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+{% if chamados %}
+<div class="table-responsive">
+  <table class="table table-hover align-middle bg-white">
+    <thead class="table-light">
+      <tr>
+        <th>Nº Ticket</th>
+        <th>Usuário</th>
+        <th>Problema</th>
+        <th>Categoria</th>
+        <th>Prioridade</th>
+        <th>Status</th>
+        <th>Aberto em</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in chamados %}
+      <tr>
+        <td><strong>{{ c.numero }}</strong></td>
+        <td>{{ c.usuario }}</td>
+        <td>{{ c.problema[:60] }}{% if c.problema|length > 60 %}...{% endif %}</td>
+        <td>{{ c.categoria }}</td>
+        <td>{{ c.prioridade }}</td>
+        <td>
+          <span class="badge {% if c.status == 'Aberto' %}bg-danger{% elif c.status == 'Em andamento' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+            {{ c.status }}
+          </span>
+        </td>
+        <td>{{ c.criado_em.strftime("%d/%m/%Y %H:%M") }}</td>
+        <td><a href="{{ url_for('tickets.detalhe', ticket_id=c.id) }}" class="btn btn-sm btn-outline-primary">Abrir</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="alert alert-info">Nenhum chamado encontrado{% if status_filtro %} para o status "{{ status_filtro }}"{% endif %}.</div>
+{% endif %}
+
+{% endblock %}

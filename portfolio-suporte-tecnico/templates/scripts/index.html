@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Scripts de Automação{% endblock %}
+{% block content %}
+
+<h2><i class="fa-solid fa-code text-warning"></i> Scripts de Automação</h2>
+<p class="text-muted">Scripts prontos em PowerShell e Batch para tarefas rotineiras de suporte técnico.</p>
+
+<div class="row g-4">
+  {% for script in scripts %}
+  <div class="col-md-6">
+    <div class="card module-card p-4">
+      <h5><i class="fa-solid fa-gear"></i> {{ script.nome }}</h5>
+      <p class="text-muted">{{ script.descricao }}</p>
+      <div class="d-flex flex-wrap gap-2 mt-2">
+        <a href="{{ url_for('scripts.visualizar', pasta='powershell', nome_arquivo=script.powershell) }}" class="btn btn-sm btn-outline-primary">
+          <i class="fa-solid fa-eye"></i> Ver PowerShell
+        </a>
+        <a href="{{ url_for('scripts.baixar', pasta='powershell', nome_arquivo=script.powershell) }}" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-download"></i> Baixar .ps1
+        </a>
+        <a href="{{ url_for('scripts.visualizar', pasta='batch', nome_arquivo=script.batch) }}" class="btn btn-sm btn-outline-dark">
+          <i class="fa-solid fa-eye"></i> Ver Batch
+        </a>
+        <a href="{{ url_for('scripts.baixar', pasta='batch', nome_arquivo=script.batch) }}" class="btn btn-sm btn-dark">
+          <i class="fa-solid fa-download"></i> Baixar .bat
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

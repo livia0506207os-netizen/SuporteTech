@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Scripts de Rede - Laboratório{% endblock %}
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('lab.index') }}">Laboratório Virtual</a></li>
+    <li class="breadcrumb-item active">Scripts de Rede</li>
+  </ol>
+</nav>
+
+<div class="card p-4">
+  <div class="markdown-body">
+    {{ conteudo_html | safe }}
+  </div>
+</div>
+
+<a href="{{ url_for('lab.index') }}" class="btn btn-outline-secondary mt-4">
+  <i class="fa-solid fa-arrow-left"></i> Voltar ao Laboratório
+</a>
+
+{% endblock %}

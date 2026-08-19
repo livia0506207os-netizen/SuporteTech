@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Simulação de Firewall{% endblock %}
+{% block content %}
+
+<h2><i class="fa-solid fa-shield-halved"></i> Segurança Básica</h2>
+
+<ul class="nav nav-tabs mb-4">
+  <li class="nav-item"><a class="nav-link active" href="{{ url_for('security.firewall') }}">Simulação de Firewall</a></li>
+  <li class="nav-item"><a class="nav-link" href="{{ url_for('docs.seguranca_guia', slug='boas-praticas') }}">Boas Práticas</a></li>
+  <li class="nav-item"><a class="nav-link" href="{{ url_for('docs.seguranca_guia', slug='backup') }}">Rotina de Backup</a></li>
+</ul>
+
+<div class="alert alert-secondary">
+  <i class="fa-solid fa-circle-info"></i>
+  Este painel é uma <strong>simulação educacional</strong> de configuração de regras de firewall.
+  Nenhuma regra é aplicada a um firewall real — o objetivo é demonstrar conhecimento sobre o tema.
+</div>
+
+<div class="row g-4">
+  <div class="col-md-7">
+    <div class="card p-4">
+      <h5>Regras configuradas</h5>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Nome</th>
+              <th>Direção</th>
+              <th>Protocolo</th>
+              <th>Porta</th>
+              <th>Ação</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in regras %}
+            <tr>
+              <td>{{ r.nome }}</td>
+              <td>{{ r.direcao }}</td>
+              <td>{{ r.protocolo }}</td>
+              <td>{{ r.porta }}</td>
+              <td>
+                <span class="badge {% if r.acao == 'PERMITIR' %}bg-success{% else %}bg-danger{% endif %}">{{ r.acao }}</span>
+              </td>
+              <td>
+                <form method="POST" action="{{ url_for('security.remover_regra', regra_id=r.id) }}"
+                      onsubmit="return confirm('Remover esta regra?');">
+                  <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="card p-4">
+      <h5><i class="fa-solid fa-plus"></i> Nova regra</h5>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Nome da regra</label>
+          <input type="text" class="form-control" name="nome" placeholder="Ex: Bloquear SSH externo" required>
+        </div>
+        <div class="row">
+          <div class="col-6 mb-3">
+            <label class="form-label">Porta</label>
+            <input type="number" class="form-control" name="porta" min="0" max="65535" required>
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Protocolo</label>
+            <select class="form-select" name="protocolo">
+              <option>TCP</option>
+              <option>UDP</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 mb-3">
+            <label class="form-label">Direção</label>
+            <select class="form-select" name="direcao">
+              <option>Entrada</option>
+              <option>Saída</option>
+            </select>
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Ação</label>
+            <select class="form-select" name="acao">
+              <option>PERMITIR</option>
+              <option>BLOQUEAR</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-dark w-100"><i class="fa-solid fa-plus"></i> Adicionar regra</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

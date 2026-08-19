@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Início - Portfólio Suporte Técnico{% endblock %}
+{% block content %}
+
+<div class="hero-section">
+  <h1><i class="fa-solid fa-headset"></i> Portfólio &mdash; Analista de Suporte Técnico</h1>
+  <p class="lead mb-0">Sistema completo desenvolvido em Python/Flask para demonstrar competências em Help Desk, gestão de chamados, laboratório virtual, automação e segurança da informação.</p>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-4">
+    <div class="card text-center p-3">
+      <h2 class="text-primary">{{ total_chamados }}</h2>
+      <p class="mb-0 text-muted">Chamados registrados</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-center p-3">
+      <h2 class="text-danger">{{ abertos }}</h2>
+      <p class="mb-0 text-muted">Chamados em aberto</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-center p-3">
+      <h2 class="text-success">{{ resolvidos }}</h2>
+      <p class="mb-0 text-muted">Chamados resolvidos</p>
+    </div>
+  </div>
+</div>
+
+<h4 class="mb-3">Módulos do sistema</h4>
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card module-card p-4">
+      <div class="module-icon"><i class="fa-solid fa-book text-primary"></i></div>
+      <h5>Documentação de Help Desk</h5>
+      <p class="text-muted">Guias passo a passo para os problemas mais comuns no suporte técnico.</p>
+      <a href="{{ url_for('docs.index') }}" class="btn btn-outline-primary mt-auto">Acessar</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card module-card p-4">
+      <div class="module-icon"><i class="fa-solid fa-ticket text-danger"></i></div>
+      <h5>Simulação de Chamados</h5>
+      <p class="text-muted">Abertura, acompanhamento e atualização de tickets de suporte.</p>
+      <a href="{{ url_for('tickets.listar') }}" class="btn btn-outline-danger mt-auto">Acessar</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card module-card p-4">
+      <div class="module-icon"><i class="fa-solid fa-flask text-success"></i></div>
+      <h5>Laboratório Virtual</h5>
+      <p class="text-muted">Roteiros para VMs, configuração de rede e vídeos demonstrativos.</p>
+      <a href="{{ url_for('lab.index') }}" class="btn btn-outline-success mt-auto">Acessar</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card module-card p-4">
+      <div class="module-icon"><i class="fa-solid fa-code text-warning"></i></div>
+      <h5>Scripts de Automação</h5>
+      <p class="text-muted">Scripts PowerShell e Batch prontos para baixar e executar.</p>
+      <a href="{{ url_for('scripts.index') }}" class="btn btn-outline-warning mt-auto">Acessar</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card module-card p-4">
+      <div class="module-icon"><i class="fa-solid fa-shield-halved text-dark"></i></div>
+      <h5>Segurança Básica</h5>
+      <p class="text-muted">Boas práticas, simulação de firewall e rotina de backup.</p>
+      <a href="{{ url_for('security.firewall') }}" class="btn btn-outline-dark mt-auto">Acessar</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card module-card p-4">
+      <div class="module-icon"><i class="fa-brands fa-github text-secondary"></i></div>
+      <h5>Código-fonte</h5>
+      <p class="text-muted">Projeto estruturado e documentado, pronto para publicação no GitHub.</p>
+      <a href="{{ url_for('docs.index') }}" class="btn btn-outline-secondary mt-auto">Ver README</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
